@@ -1,0 +1,19 @@
+{
+  "name": "worldcup",
+  "version": "0.0.1",
+  "description": "Pull streaming tweets into mongodb",
+  "main": "pullTweets.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitter",
+    "streaming",
+    "mongodb"
+  ],
+  "author": "freethejazz",
+  "license": "WTFPL",
+  "dependencies": {
+    "twitter": "^0.2.9"
+  }
+}
