@@ -6,7 +6,7 @@ a local mongodb instance
 ###Prerequisites
 * Have mongodb installed and running on your local machine
 * Have a twitter dev account and application
-* create a file in the root directory that looks something like:
+* create a file named `config.js` in the root directory that looks something like:
 
 ```
 module.exports = {
@@ -23,9 +23,11 @@ streaming API for 50 seconds.
 
 ###Modifying
 
-*Stream Filtering*
+_Stream Filtering_
+
 Add a `keywords` property to your config exports object and set it to a comma separated
 string of keywords to look for in the twitter stream.
 
-*Length of Time*
+_Length of Time_
+
 Add a `timeout` property to your config exports object and set it to a number representing the ms length of time you want the stream connection to be open.
