@@ -1,26 +1,20 @@
-var twitter = require('twitter');
-var MongoClient = require('mongodb').MongoClient;
-
+var TweetStreamToDb = require('./tweetStreamToDb.js');
 var config = require('./config.js');
 
-var twit = new twitter({
+var tweetStream = new TweetStreamToDb({
+  twitterConf: {
     consumer_key: config.cKey,
     consumer_secret: config.cSecret,
     access_token_key: config.tKey,
     access_token_secret: config.tSecret 
+  },
+  mongoConf: {
+    url: 'mongodb://127.0.0.1:27017/',
+    db: 'worldcup',
+    collection: 'tweets'
+  }
 });
 
-MongoClient.connect('mongodb://127.0.0.1:27017/worldcup', function(err, db) {
-  if(err) throw err;
-  var collection = db.collection('tweets');
+tweetStream.filter(config.keywords);
 
-  twit.stream('filter', {track: config.keywords || 'worldcup,fifa'}, function(stream) {
-    stream.on('data', function(data) {
-      collection.insert(data, {safe:false});
-    });
-    setTimeout(function() {
-      stream.destroy();
-      db.close();
-    }, config.timeout || 50000);
-  });
-});
+setTimeout(tweetStream.closeDb.bind(tweetStream), 20 * 1000);
