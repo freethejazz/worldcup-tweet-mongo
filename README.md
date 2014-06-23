@@ -27,7 +27,7 @@ var tweetStream = new TweetStreamToDb({
 ```
 
 Then simply call the `filter` method on the instantiated `TweetStreamToDb`,
-passing a string of comma separated keywords to field by.
+passing a string of comma separated keywords to filter by.
 
 ```
 tweetStream.filter('fifa,worldcup');
