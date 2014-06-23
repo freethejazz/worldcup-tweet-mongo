@@ -26,7 +26,7 @@ var tweetStream = new TweetStreamToDb({
 });
 ```
 
-Then simply call the `filter` method on the instanciated `TweetStreamToDb`,
+Then simply call the `filter` method on the instantiated `TweetStreamToDb`,
 passing a string of comma separated keywords to field by.
 
 ```
