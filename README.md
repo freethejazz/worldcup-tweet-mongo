@@ -6,28 +6,33 @@ a local mongodb instance
 ###Prerequisites
 * Have mongodb installed and running on your local machine
 * Have a twitter dev account and application
-* create a file named `config.js` in the root directory that looks something like:
+
+###Usage
 
 ```
-module.exports = {
-  cKey: 'YOUR CONSUMER KEY',
-  cSecret: 'YOUR CONSUMER SECRET',
-  tKey: 'YOUR TOKEN KEY',
-  tSecret: 'YOUR TOKEN SECRET'
-};
+var TweetStreamToDb = require('./tweetStreamToDb.js');
+var tweetStream = new TweetStreamToDb({
+  twitterConf: {
+    consumer_key: 'YOUR KEY HERE',
+    consumer_secret: 'YOUR SECRET HERE',
+    access_token_key: 'YOUR TOKEN KEY',
+    access_token_secret: 'YOUR TOKEN SECRET' 
+  },
+  mongoConf: {
+    url: 'FULL URL',
+    db: 'DB NAME',
+    collection: 'COLLECTION NAME'
+  }
+});
 ```
 
-###Running it
-`node pullTweets.js` will start the application and will pull from the
-streaming API for 50 seconds.
+Then simply call the `filter` method on the instanciated `TweetStreamToDb`,
+passing a string of comma separated keywords to field by.
 
-###Modifying
+```
+tweetStream.filter('fifa,worldcup');
+```
 
-_Stream Filtering_
-
-Add a `keywords` property to your config exports object and set it to a comma separated
-string of keywords to look for in the twitter stream.
-
-_Length of Time_
-
-Add a `timeout` property to your config exports object and set it to a number representing the ms length of time you want the stream connection to be open.
+When you're done listening, call `stopStream` to close the stream,
+but leave the db open. If you're done with everything, call
+`closeDb`.
