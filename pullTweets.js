@@ -11,10 +11,10 @@ var tweetStream = new TweetStreamToDb({
   mongoConf: {
     url: 'mongodb://127.0.0.1:27017/',
     db: 'worldcup',
-    collection: 'tweets'
+    collection: 'hondurasEcuador'
   }
 });
 
 tweetStream.filter(config.keywords);
 
-setTimeout(tweetStream.closeDb.bind(tweetStream), 20 * 1000);
+setTimeout(tweetStream.closeDb.bind(tweetStream), 2 * 60 * 60 * 1000);
