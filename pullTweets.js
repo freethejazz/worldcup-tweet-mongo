@@ -1,20 +1,20 @@
 var TweetStreamToDb = require('./tweetStreamToDb.js');
-var config = require('./config.js');
 
 var tweetStream = new TweetStreamToDb({
   twitterConf: {
-    consumer_key: config.cKey,
-    consumer_secret: config.cSecret,
-    access_token_key: config.tKey,
-    access_token_secret: config.tSecret 
+    consumer_key: 'YOUR KEY HERE',
+    consumer_secret: 'YOUR SECRET HERE',
+    access_token_key: 'YOUR TOKEN KEY',
+    access_token_secret: 'YOUR TOKEN SECRET' 
   },
   mongoConf: {
-    url: 'mongodb://127.0.0.1:27017/',
-    db: 'worldcup',
-    collection: 'hondurasEcuador'
+    url: 'FULL URL',
+    db: 'DB NAME',
+    collection: 'COLLECTION NAME'
   }
 });
 
-tweetStream.filter(config.keywords);
+tweetStream.filter('kewords,separated,by,commas');
 
-setTimeout(tweetStream.closeDb.bind(tweetStream), 2 * 60 * 60 * 1000);
+//Defaulting to listening for an hour
+setTimeout(tweetStream.closeDb.bind(tweetStream), 1 * 60 * 60 * 1000);
